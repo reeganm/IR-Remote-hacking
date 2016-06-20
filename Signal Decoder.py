@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 import serial
 import numpy as np
@@ -47,10 +47,11 @@ def readlineCR(port):
                      print(rv)
                      return(rv)
                  except:
-                     print("invalid string")
+                     #print("invalid string")
                      rv = b"" #start over
         else:
-            print("invalid character received")
+            rv = rv
+            #print("invalid character received (probably 0)")
 
 try:
     #open serial
