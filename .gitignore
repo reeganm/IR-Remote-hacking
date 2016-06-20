@@ -1,1 +1,4 @@
 *.json
+*.hex
+Reciever/upload.sh
+Transmitter/upload.sh

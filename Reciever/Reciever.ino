@@ -15,12 +15,11 @@ uint8_t readings[num_readings];
 
 void outputData(void)
 {
-  Serial.print(" ");
   for( uint16_t i = 0; i<num_readings; i++)
   {
     Serial.print(readings[i]);
   }
-  Serial.print("\n ");
+  Serial.print('\n');
 }
 
 void setup() {
@@ -46,8 +45,8 @@ void loop() {
   }
   if(millis() -timer > 2000)
   {
-    Serial.print("freeMem: ");
-    Serial.println(freeMemory());
+    //Serial.print("freeMem: ");
+    //Serial.println(freeMemory());
     timer = millis();
   }
 }
