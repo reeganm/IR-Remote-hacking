@@ -1,4 +1,8 @@
 #define mod_t 9 //1/2 modulation period
+// 1 / 38000 Hz * 1000000us =  26
+// 26 / 2 = 13
+// rounding down to 9 works so I went with it
+
 #define bit_t 470
 #define msg_len 15
 
@@ -102,5 +106,5 @@ void loop ()
     }
     blink_t = millis();
   }
-  delay(10);
+  delay(1);
 }
