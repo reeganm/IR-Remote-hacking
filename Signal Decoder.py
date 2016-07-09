@@ -30,32 +30,32 @@ else:
     json.dump(serial_settings,f, indent=4)
     f.close()
 
-valid_chars = ['0' '1' '\n'] #binary data
+valid_chars = [ord('0'), ord('1'), ord('\n')] #binary data
 
 #### Reading Serial ####
 
 def readlineCR(port):
-    rv = b""
+    #wait for start of line %
+    hold = 1
+    while hold:
+        ch = port.read(1)
+        ch = ord(ch)
+        if ch == ord('%'):
+            hold = 0
+    rv = ""
     while True:
-        ch = port.read()
+        ch = port.read(1)
+        ch = ord(ch)
         if ch in valid_chars:
-            rv += ch
-            if ch=='\n': #if there is a new line
-                 try:
-                     #if it is a valid string it will decode
-                     rv = rv.decode("utf-8")
-                     print(rv)
-                     return(rv)
-                 except:
-                     #print("invalid string")
-                     rv = b"" #start over
-        else:
-            rv = rv
-            #print("invalid character received (probably 0)")
+            rv += chr(ch)
+            if ch==ord('\n'): #if there is a new line
+                 print(rv)
+                 return(rv)
 
 try:
     #open serial
-    s = serial.Serial(serial_settings['port'], baudrate=serial_settings['baud'], timeout=3.0)
+    s = serial.Serial(serial_settings['port'], baudrate=serial_settings['baud'])
+    print('Serial Open')
     #receive string from arduino
     string = readlineCR(s)
     #close serial
