@@ -10,10 +10,8 @@ import time
 import json
 import serial
 
-#define messages
-messages = {}
-messages['on'] = b'%\xff\xff\x01\xaa\xa8\xa8\x8a\xa8\x8a\xaa\x22\x8a\xaa\x02\x00'
-messages['off'] = b'%\xff\xff\x01\x54\x51\x51\x15\x51\x45\x55\x15\x45\x55\x01\x00'
+#import messages
+from IR_messages import messages
 
 #check number of input arguments
 if len(sys.argv) == 2:
@@ -26,14 +24,14 @@ if len(sys.argv) == 2:
        print('Invalid Command')
        print('Valid Commands Are:')
        print(list(messages.keys()))
-       #exit program
-       exit()
+       #exit program with non zero
+       sys.exit(1)
 else:
    print('Wrong Number of Input Arguments')
    print('Script Usage:')
    print('./AC_control.py <command>')
    #exit program
-   exit()
+   sys.exit(2)
 
 #load previous serial settings or prompt for new ones
 settings_file = '/home/pi/settings.json'
@@ -55,7 +53,13 @@ else:
     f.close()
 
 #open serial port
-s = serial.Serial(serial_settings['port'],serial_settings['baud'],timeout=3)
+try:
+   s = serial.Serial(serial_settings['port'],serial_settings['baud'],timeout=3)
+except:
+   print('error with serial settings')
+   os.remove(settings_file)
+   sys.exit(3)
+   
 print('Serial Port Connected.')
 
 #opening serial resets arduino
@@ -88,3 +92,5 @@ else:
 #close serial port
 s.close()
 print('Port Closed')
+
+sys.exit(0)
