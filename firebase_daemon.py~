@@ -1,7 +1,5 @@
 #!/usr/bin/python3
 
-path = '/home/pi/IR-Remote-hacking/'
-
 import time
 from firebase import firebase
 import json
