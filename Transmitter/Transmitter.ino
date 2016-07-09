@@ -1,5 +1,5 @@
-#define mod_t 13 //1/2 modulation period
-#define bit_t 480
+#define mod_t 9 //1/2 modulation period
+#define bit_t 470
 #define msg_len 15
 
 #define msg_start '%'
@@ -44,9 +44,9 @@ void ir_send_msg(void)
 
 bool check_for_start(void)
 {
-  if(Serial.available())
+  if(Serial.read() == msg_start)
   {
-    return(Serial.read() == msg_start);
+    return(1);
   }
   else
   {
@@ -75,6 +75,7 @@ void echo_code(void)
 void setup ()
 {
   Serial.begin(9600);
+  
   pinMode(IR_p,OUTPUT);
   pinMode(LED_p,OUTPUT);
 }
@@ -101,4 +102,5 @@ void loop ()
     }
     blink_t = millis();
   }
+  delay(10);
 }
