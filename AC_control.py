@@ -36,7 +36,7 @@ else:
    exit()
 
 #load previous serial settings or prompt for new ones
-settings_file = 'settings.json'
+settings_file = '/home/pi/settings.json'
 if os.path.isfile(settings_file):
     #read file
     f = open(settings_file,'r')
