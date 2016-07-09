@@ -2,4 +2,5 @@
 *.hex
 Reciever/upload.sh
 Transmitter/upload.sh
+*.pycAC_control.py~ firebase_control.py~ firebase_daemon.py~ Signal Decoder.py~
 *.pyc
