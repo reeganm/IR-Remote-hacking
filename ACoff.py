@@ -5,6 +5,7 @@
 import os
 import json
 import serial
+import time
 
 #load previous serial settings are prompt for new ones
 settings_file = 'settings.json'
@@ -23,8 +24,9 @@ else:
     f.close()
 
 
-s = serial.Serial(serial_settings['port'],serial_settings['baud'])
+s = serial.Serial(serial_settings['port'],serial_settings['baud'],timeout=3)
 
+time.sleep(5)
 
 off = b'%\xff\xff\x01\x54\x51\x51\x15\x51\x45\x55\x15\x45\x55\x01\x00'
 
