@@ -1,4 +1,4 @@
-#include <MemoryFree.h>
+//#include <MemoryFree.h>
 #define F_CPU 16000000UL //16MHz
 #include <util/delay.h>
 
@@ -15,6 +15,7 @@ uint8_t readings[num_readings];
 
 void outputData(void)
 {
+  Serial.print('%');
   for( uint16_t i = 0; i<num_readings; i++)
   {
     Serial.print(readings[i]);
