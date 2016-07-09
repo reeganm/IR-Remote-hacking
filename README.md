@@ -13,6 +13,6 @@
   * Python script for sending IR commands to arduino
   
   
-  * Shell Script for uploading to an arduino connected to a raspberry pi via sftp/ssh/avrdude
+  * Shell Script for uploading binaries to an arduino connected to a raspberry pi via sftp/ssh/avrdude
   
   * Shell Script for remotely listing open serial ports on raspberry pi
