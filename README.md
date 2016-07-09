@@ -1,18 +1,18 @@
 # IR-Remote-hacking
-Controlling my air-conditioner through its IR remote.
+## Controlling my air-conditioner through its IR remote.
 
-Features:
+### Features:
 
-  *Arduino Sketch for reading IR remote signals
+  * Arduino Sketch for reading IR remote signals
   
-  *Python Script for decoding IR remote signals
-  
-  
-  *Arduino Sketch for modulating and transmitting IR
-  
-  *Python script for sending IR commands to arduino
+  * Python Script for decoding IR remote signals
   
   
-  *Shell Script for uploading to an arduino connected to a raspberry pi via sftp/ssh/avrdude
+  * Arduino Sketch for modulating and transmitting IR
   
-  *Shell Script for remotely listing open serial ports on raspberry pi
+  * Python script for sending IR commands to arduino
+  
+  
+  * Shell Script for uploading to an arduino connected to a raspberry pi via sftp/ssh/avrdude
+  
+  * Shell Script for remotely listing open serial ports on raspberry pi
