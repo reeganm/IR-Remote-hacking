@@ -1,6 +1,8 @@
 # IR-Remote-hacking
 Controlling my air-conditioner through its IR remote.
+
 Features:
+
   *Arduino Sketch for reading IR remote signals
   
   *Python Script for decoding IR remote signals
