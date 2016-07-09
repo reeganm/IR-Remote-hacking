@@ -1,12 +1,12 @@
-#define mod_t 13
-#define bit_t 300
-#define msg_len 1
+#define mod_t 13 //1/2 modulation period
+#define bit_t 480
+#define msg_len 15
 
-#define msg_start '$'
+#define msg_start '%'
 
 uint8_t buff[msg_len]; //global msg buffer
 
-#define IR_p 10
+#define IR_p 12
 #define LED_p 13
 
 uint32_t blink_t;
@@ -44,7 +44,14 @@ void ir_send_msg(void)
 
 bool check_for_start(void)
 {
- return(Serial.read() == msg_start);
+  if(Serial.available())
+  {
+    return(Serial.read() == msg_start);
+  }
+  else
+  {
+    return(0);
+  }
 }
 
 void get_code(void)
@@ -76,6 +83,7 @@ void loop ()
 {
   if(check_for_start())
   {
+    digitalWrite(LED_p,HIGH);
     get_code();
     echo_code();
     ir_send_msg();
