@@ -4,6 +4,8 @@
 
 print('This code controls my air-conditioner over infrared.')
 
+path = '/home/pi/IR-Remote-hacking/'
+
 import os
 import sys
 import time
@@ -34,7 +36,7 @@ else:
    sys.exit(2)
 
 #load previous serial settings or prompt for new ones
-settings_file = '/home/pi/settings.json'
+settings_file = path + 'settings.json'
 if os.path.isfile(settings_file):
     #read file
     f = open(settings_file,'r')

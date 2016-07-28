@@ -1,8 +1,11 @@
 #!/usr/bin/python3
 
+path = '/home/pi/IR-Remote-hacking/'
+
 import time
 from firebase import firebase
 import json
+import os
 
 #import IR messages
 from IR_messages import messages
@@ -35,6 +38,9 @@ while True:
                     print('Translates to IR message:')
                     print(messages[data['COMMAND']])
 
+                    #send command to transmitter
+                    os.system(path + 'AC_control.py ' + data['COMMAND'])
+
                     #update most recent command sent
                     #this gives feedback that message was recieved
                     firebase.put('IR','past_IR_ctr',result)
@@ -54,4 +60,4 @@ while True:
     else:
         print('No data found')
     
-    time.sleep(5)
+    time.sleep(15)
