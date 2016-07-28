@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 
+path = '/home/pi/IR-Remote-hacking/'
+
 import serial
 import numpy as np
 #import matplotlib.pyplot as plt
@@ -15,7 +17,7 @@ sample_rate = 33 #u_seconds
 #### Serial Settings ####
 
 #load previous serial settings are prompt for new ones
-settings_file = 'settings.json'
+settings_file = path + 'settings.json'
 if os.path.isfile(settings_file):
     #read file
     f = open(settings_file,'r')

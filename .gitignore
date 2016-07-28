@@ -2,4 +2,9 @@
 *.hex
 Reciever/upload.sh
 Transmitter/upload.sh
+*.pycAC_control.py~ firebase_control.py~ firebase_daemon.py~ Signal Decoder.py~
+*.pyc
+*.py~
+nppBackup/AC_control.py~.2016-07-09_111835.bak
+*.bak
 *.pyc
