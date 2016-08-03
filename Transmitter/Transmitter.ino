@@ -54,7 +54,7 @@ void ir_send_msg(void)
   }
 }
 
-bool check_for_start(void)
+char check_for_start(void)
 {
   char val = Serial.read();
   if(val == msg_start)
@@ -113,15 +113,19 @@ void Temp_Sensor_ctr(bool val)
 void Send_Temp(void)
 {
   //take an average of multiple readings
-  uint32_t sum = 0;
+  float sum = 0;
   uint16_t num = 0;
-  while(num <= 500)
+  while(num <= 250)
   {
     sum += analogRead(temp_r);
     num++;
+    delay(1);
   }
-  float temp = (float)sum / float(num);
-  Serial.println(temp);
+  float temp = sum / num;
+  temp = temp * 5 / 1024 * 100 - 50;
+  Serial.print('%'); //send % to show start of message
+  Serial.print(temp);
+  Serial.print('\n');
 }
 
 void setup ()
