@@ -2,19 +2,17 @@
 
 #Code for controlling my air conditioner
 
-print('This code controls my air-conditioner over infrared.')
+print('This code logs temperature from my Arduino and puts it on a firebase server')
 
 path = '/home/pi/IR-Remote-hacking/'
+myDataBase = 'https://mydatabase-f7de1.firebaseio.com/'
 
 import os
 import sys
 import time
 import json
 import serial
-
-#import messages
-from IR_messages import messages
-
+from firebase import firebase
 
 #load previous serial settings or prompt for new ones
 settings_file = path + 'settings.json'
@@ -35,6 +33,24 @@ else:
     json.dump(serial_settings,f, indent=4)
     f.close()
 
+def readlineCR(port):
+    #wait for start of line %
+    hold = 1
+    while hold:
+        ch = port.read(1)
+        ch = ord(ch)
+        if ch == ord('%'):
+            hold = 0
+    rv = ""
+    while True:
+        ch = port.read(1)
+        ch = ord(ch)
+        if ch in valid_chars:
+            rv += chr(ch)
+            if ch==ord('\n'): #if there is a new line
+                 print(rv)
+                 return(rv)
+
 #open serial port
 try:
    s = serial.Serial(serial_settings['port'],serial_settings['baud'],timeout=3)
@@ -52,16 +68,19 @@ time.sleep(5)
 
 #send command
 s.write(b'$')
-print('Command Sent.')
+print('Sending Temperature Request')
 
-
-
-val = s.read(100)
-print(val)
-
+#read temperature
+temp = readlinCR(port)
 
 #close serial port
 s.close()
 print('Port Closed')
+
+#connect to firebase
+print("Connecting to Firebase")
+firebase = firebase.FirebaseApplication(myDataBase,None)
+
+firebase.put('IR/temp',datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),json.dumps({'TEMP':temp}))
 
 sys.exit(0)
