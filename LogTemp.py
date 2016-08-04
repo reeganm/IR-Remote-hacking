@@ -12,6 +12,7 @@ import sys
 import time
 import json
 import serial
+import datetime
 from firebase import firebase
 
 #load previous serial settings or prompt for new ones
@@ -33,6 +34,7 @@ else:
     json.dump(serial_settings,f, indent=4)
     f.close()
 
+valid_chars = [ord('0'), ord('1'),ord('2'),ord('3'),ord('4'),ord('5'),ord('6'),ord('7'),ord('8'),ord('9'),ord('.'),ord('-'), ord('\n')]
 def readlineCR(port):
     #wait for start of line %
     hold = 1
@@ -71,7 +73,7 @@ s.write(b'$')
 print('Sending Temperature Request')
 
 #read temperature
-temp = readlinCR(port)
+temp = readlineCR(s)
 
 #close serial port
 s.close()
@@ -82,5 +84,7 @@ print("Connecting to Firebase")
 firebase = firebase.FirebaseApplication(myDataBase,None)
 
 firebase.put('IR/temp',datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"),json.dumps({'TEMP':temp}))
+
+print('Data written to firebase')
 
 sys.exit(0)

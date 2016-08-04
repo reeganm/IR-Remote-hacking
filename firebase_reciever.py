@@ -61,3 +61,6 @@ else:
     print('No data found')
 
 
+
+#log temperature
+os.system(path + 'LogTemp.py ')
