@@ -75,6 +75,9 @@ print('Sending Temperature Request')
 #read temperature
 temp = readlineCR(s)
 
+#remove \n
+temp = temp[0:(len(temp)-1)]
+
 #close serial port
 s.close()
 print('Port Closed')
